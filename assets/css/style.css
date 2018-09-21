@@ -71,6 +71,15 @@
     font-weight: bolder;
 }
 
+.card-header {
+    background-color: rgba(33,37,41,1);
+    color: white;
+    padding: 5px;
+    padding-left: 13px;
+    border: none;
+}
+
+
 /* .table {
     border-radius: 25px !important;
 } */
