@@ -50,8 +50,11 @@
               transform: scale(1) rotateX(-180deg);
     }
   }
-  
 
+  
+h4 {
+    margin: auto;
+}
 
 .jumbotron {
     background-image: url("../images/banner.jpg");
@@ -77,6 +80,7 @@
     padding: 5px;
     padding-left: 13px;
     border: none;
+
 }
 
 
