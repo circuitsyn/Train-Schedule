@@ -71,6 +71,7 @@ h4 {
     background-color: rgba(211, 211, 211, 0.7);
     border-radius: 25px;
     padding:50px;
+    /* font-size: 50px; */
     font-weight: bolder;
 }
 
@@ -83,8 +84,32 @@ h4 {
 
 }
 
+#signerIMG {
+    height: 75px;
+    border-radius: 15px;
+}
 
-/* .table {
-    border-radius: 25px !important;
-} */
+#bottomContent {
+    margin: auto;
+    text-align: center;
+    padding:25px;
+}
+
+#introText {
+    margin: auto;
+    Padding: 25px;
+    text-align: center;
+
+}
+
+.insertFont {
+    font-family: titleFont;
+    font-size: 25px;
+    
+}
+
+.lead {
+    text-align: center;
+}
+
 
