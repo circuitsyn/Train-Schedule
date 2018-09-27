@@ -28,13 +28,15 @@ var config = {
   var destinationServ = "";
   var frequencyServ = 0;
   var nextArrivalServ = 0;
-
+  var minutesAwayServ = 0;
+  var nextArrivalServ = 0;
 
     // if (snapshot.child("trainName").exists()) {
       trainName = snapshot.val().trainNameServ;
       destination = snapshot.val().destinationServ;
       frequency = snapshot.val().frequencyServ;
       nextArrival = snapshot.val().nextArrivalServ;
+      minutesAway = snapshot.val().minutesAwayServ;
 
            
 
@@ -77,6 +79,10 @@ var config = {
     var tMinutesTillTrain = frequency - tRemainder;
     console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
   
+    //NEXT ARRIVAL 
+    var nextArrival = moment().add(tMinutesTillTrain, 'minutes').format("hh:mm A");
+    console.log(nextArrival);
+
     database.ref().push({
       trainNameServ: trainName,
       destinationServ: destination,
