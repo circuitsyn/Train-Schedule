@@ -1,6 +1,8 @@
+
+//function to not load javascript until htmls loads and page is ready
 $( document ).ready(function() {
 
-
+    //establish starter variables
     var trainName = ""; 
     var destination = "";
     var frequency = 0; 
@@ -18,71 +20,56 @@ var config = {
     messagingSenderId: "643061639145",
   };
 
-  
+  //initializing firebase config
   firebase.initializeApp(config);
-  
+   //Bring firebase down to connect for manipulation
   var database = firebase.database();
   
+  //receive data from firebase and store in variables
   database.ref().on("child_added", function (snapshot) {
-  var trainNameServ = "";
-  var destinationServ = "";
-  var frequencyServ = 0;
-  var nextArrivalServ = 0;
-  var minutesAwayServ = 0;
-  var nextArrivalServ = 0;
-
-    // if (snapshot.child("trainName").exists()) {
-      trainName = snapshot.val().trainNameServ;
-      destination = snapshot.val().destinationServ;
-      frequency = snapshot.val().frequencyServ;
-      nextArrival = snapshot.val().nextArrivalServ;
-      minutesAway = snapshot.val().minutesAwayServ;
+    
+  trainName = snapshot.val().trainNameServ;
+  destination = snapshot.val().destinationServ;
+  frequency = snapshot.val().frequencyServ;
+  nextArrival = snapshot.val().nextArrivalServ;
+  minutesAway = snapshot.val().minutesAwayServ;
 
            
+  //Sppend data to table
+  $("#tbody").append("<tr> <td>" + trainName + "</td> <td>" + destination + "</td> <td>" + frequency + "</td> <td>" + nextArrival + "</td> <td>" + minutesAway + "</td> </tr>");
 
-        $("#tbody").append("<tr> <td>" + trainName + "</td> <td>" + destination + "</td> <td>" + frequency + "</td> <td>" + nextArrival + "</td> <td>" + minutesAway + "</td> </tr>");
-//     }
-// }, function (errorObject) {
-//     console.log("The read failed: " + errorObject.code);
 });
 
-
+  //trigger button to run when data is submitted
   $("#submit-button").on("click", function (event) {
       event.preventDefault()
-      console.log("submitted")
+
+      //Getting data from form fields and putting it in variables
       trainName = $("#trainName-input").val()
       destination = $("#destination-input").val()
       firstTime = $("#first-time-input").val()
       frequency = $("#frequency-input").val()
-      console.log('Name: ' + trainName);
-      console.log('destination: ' + destination);
-      console.log('initial time: ' + firstTime);
-      console.log('frequency: ' + frequency);
-
-      // First Time (pushed back 1 year to make sure it comes before current time)
+      
+      // First time (pushed back 1 year to make sure it comes before current time)
     var firstTimeConverted = moment(firstTime, "HH:mm").subtract(1, "years");
     console.log(firstTimeConverted);
 
     // Current Time
     var currentTime = moment();
-    console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
-
+    
     // Difference between the times
     var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
-    console.log("DIFFERENCE IN TIME: " + diffTime);
-
+    
     // Time apart (remainder)
     var tRemainder = diffTime % frequency;
-    console.log(tRemainder);
-
-      // Minute Until Train
+    
+    // Minute Until Train
     var tMinutesTillTrain = frequency - tRemainder;
-    console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
-  
-    //NEXT ARRIVAL 
+      
+    //Next arrival time
     var nextArrival = moment().add(tMinutesTillTrain, 'minutes').format("hh:mm A");
-    console.log(nextArrival);
-
+    
+    //Firebase command to push data in variables to firebase database
     database.ref().push({
       trainNameServ: trainName,
       destinationServ: destination,
