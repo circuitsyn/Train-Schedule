@@ -24,20 +24,24 @@ var config = {
   var database = firebase.database();
   
   database.ref().on("child_added", function (snapshot) {
-  
-    if (snapshot.child("trainName").exists()) {
+  var trainNameServ = "";
+  var destinationServ = "";
+  var frequencyServ = 0;
+  var nextArrivalServ = 0;
+
+
+    // if (snapshot.child("trainName").exists()) {
       trainName = snapshot.val().trainNameServ;
       destination = snapshot.val().destinationServ;
       frequency = snapshot.val().frequencyServ;
       nextArrival = snapshot.val().nextArrivalServ;
 
-        var monthsWorked = moment().diff(moment(startDate), "months");
-        
+           
 
-        $("#tbody").append("<tr> <td>" + trainName + "</td> <td>" + destination + "</td> <td>" + frequency + "</td> <td>" + nextArrival + "</td> <td>" + rate + "</td> <td>" + minutesAway + "</td> </tr>");
-    }
-}, function (errorObject) {
-    console.log("The read failed: " + errorObject.code);
+        $("#tbody").append("<tr> <td>" + trainName + "</td> <td>" + destination + "</td> <td>" + frequency + "</td> <td>" + nextArrival + "</td> <td>" + minutesAway + "</td> </tr>");
+//     }
+// }, function (errorObject) {
+//     console.log("The read failed: " + errorObject.code);
 });
 
 
