@@ -1,11 +1,11 @@
 $( document ).ready(function() {
 
 
-    var trainName; 
-    var destination;
-    var frequency; 
-    var nextArrival; 
-    var minutesAway;
+    var trainName = ""; 
+    var destination = "";
+    var frequency = 0; 
+    var nextArrival = 0; 
+    var minutesAway = 0;
     
 
 // Initialize Firebase
@@ -73,14 +73,14 @@ var config = {
     var tMinutesTillTrain = frequency - tRemainder;
     console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
   
-      database.ref().push({
-        trainNameServ: trainName,
-        destinationServ: destination,
-        frequencyServ: frequency,
-        nextArrivalServ: nextArrival,
-        minutesAwayServ: tMinutesTillTrain,
-      })
-  })
+    database.ref().push({
+      trainNameServ: trainName,
+      destinationServ: destination,
+      frequencyServ: frequency,
+      nextArrivalServ: nextArrival,
+      minutesAwayServ: tMinutesTillTrain,
+    });
+  });
   
   
 
