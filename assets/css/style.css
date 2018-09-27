@@ -2,7 +2,7 @@
     font-family: "titleFont";
     src: url("../../assets/fonts/SUBWT___.woff") format("woff");
 }
-
+ 
 .flip-scale-up-hor {
     font-family: titleFont;
 	-webkit-animation: flip-scale-up-hor 0.5s linear ;
