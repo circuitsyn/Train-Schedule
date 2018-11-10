@@ -24,7 +24,38 @@ var config = {
   firebase.initializeApp(config);
    //Bring firebase down to connect for manipulation
   var database = firebase.database();
-  
+
+  //firebase authentification
+  var provider = new firebase.auth.GoogleAuthProvider();
+
+  function googleSignin() {
+    firebase.auth()
+    
+    .signInWithPopup(provider).then(function(result) {
+        var token = result.credential.accessToken;
+        var user = result.user;
+      
+        console.log(token)
+        console.log(user)
+    }).catch(function(error) {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+      
+        console.log(error.code)
+        console.log(error.message)
+    });
+  };
+
+  function googleSignout() {
+    firebase.auth().signOut()
+    
+    .then(function() {
+        console.log('Signout Succesfull')
+    }, function(error) {
+        console.log('Signout Failed')  
+    });
+  };
+
   //receive data from firebase and store in variables
   database.ref().on("child_added", function (snapshot) {
     
